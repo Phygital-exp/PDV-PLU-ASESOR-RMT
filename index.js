@@ -11,7 +11,7 @@ const AUTH_HEADERS = {
 
 app.use(cors());
 
-app.get("/api/Levapan/pdv", async (req, res) => {
+app.get("/api/asesorrmt/plu", async (req, res) => {
     try {
         const apiUrl = "https://botai.smartdataautomation.com/api_backend_ai/dinamic-db/report/119/plu_asesor_rmt";
         
@@ -21,8 +21,8 @@ app.get("/api/Levapan/pdv", async (req, res) => {
         const data = await response.json();
         res.json(data);
     } catch (err) {
-        console.error("Error en el proxy levapan PDV:", err);
-        res.status(500).json({ error: "Error al obtener datos de levapan PDV" });
+        console.error("Error en el proxy asesorrmt PLU:", err);
+        res.status(500).json({ error: "Error al obtener datos de asesorrmt PLU" });
     }
 });
 
