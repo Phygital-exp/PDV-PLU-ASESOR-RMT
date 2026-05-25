@@ -13,16 +13,7 @@ app.use(cors());
 
 app.get("/api/Levapan/pdv", async (req, res) => {
     try {
-        // Determinar qué API usar según el parámetro 'tipo'
-        const tipo = req.query.tipo;
-        let apiUrl;
-        
-        if (tipo === 'independiente') {
-            apiUrl = "https://botai.smartdataautomation.com/api_backend_ai/dinamic-db/report/119/Levapan_PDVs_independientes";
-        } else {
-            // Por defecto, usar la API de modernos (o todos)
-            apiUrl = "https://botai.smartdataautomation.com/api_backend_ai/dinamic-db/report/119/Levapan_PDVs";
-        }
+        const apiUrl = "https://botai.smartdataautomation.com/api_backend_ai/dinamic-db/report/119/plu_asesor_rmt";
         
         console.log(`Consultando API: ${apiUrl}`);
         
