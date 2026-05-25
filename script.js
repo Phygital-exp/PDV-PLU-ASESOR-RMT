@@ -5,7 +5,7 @@ let filteredData = [];
 let currentChannel = '';
 
 // URL base de la API
-const API_BASE_URL = 'https://pdv-plu-asesor-rmt.railway.internal/api/asesorrmt/plu';
+const API_BASE_URL = '/api/asesorrmt/plu';
 
 // Cargar datos de la API según el canal seleccionado
 async function loadData() {
