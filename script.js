@@ -83,11 +83,11 @@ function renderResults(results) {
         results.forEach(result => {
             output += `
                 <div class="result-item">
-                    <h3>${result.PLU || 'N/A'}</h3>
                     <ul>
-                        <li><strong>Descripción:</strong> ${result.DESCRIPCION_PLU || 'N/A'}
-                        <i class="material-icons copy-icon" onclick="copyToClipboard('${result.DESCRIPCION_PLU}')">content_copy</i>
+                        <li><strong>PLU:</strong> ${result.PLU || 'N/A'}
+                        <i class="material-icons copy-icon" onclick="copyToClipboard('${result.PLU}')">content_copy</i>
                         </li>
+                        <li><strong>Descripción:</strong> ${result.DESCRIPCION_PLU || 'N/A'}</li>
                         <li><strong>Marca:</strong> ${result.MARCA || 'N/A'}</li>
                         <li><strong>Sublínea:</strong> ${result.SUBLINEA || 'N/A'}</li>
                     </ul>
