@@ -5,7 +5,7 @@ let filteredData = [];
 let currentChannel = '';
 
 // URL base de la API
-const API_BASE_URL = 'https://pdv-plu-asesor-rmt.railway.internal/api/Levapan/pdv';
+const API_BASE_URL = 'https://pdv-plu-asesor-rmt.railway.internal/api/asesorrmt/plu';
 
 // Cargar datos de la API según el canal seleccionado
 async function loadData() {
@@ -22,8 +22,8 @@ async function loadData() {
         if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
         
         const data = await response.json();
-        fullData = data.result || [];
-        filteredData = fullData; // Los datos ya vienen filtrados desde el backend
+        fullData = Array.isArray(data) ? data : (data.result || []);
+        filteredData = fullData;
         currentChannel = '';
 
         console.log(`Datos cargados:`, fullData.length, 'registros');
@@ -47,7 +47,7 @@ async function loadData() {
 // Inicializar Fuse.js para búsqueda rápida
 function initializeFuse() {
     const options = {
-        keys: ['NIT','CODIGOCLIENTE','SAP','GRUPO VENDEDOR','REGION','CIUDAD','CANAL','RAZON SOCIAL','PDV','DIRECCION','BARRIO','POBLACION','SUBGRUPO'],
+        keys: ['PLU', 'DESCRIPCION_PLU', 'MARCA', 'SUBLINEA'],
         threshold: 0.3,
     };
     fuse = new Fuse(filteredData, options);
@@ -83,21 +83,13 @@ function renderResults(results) {
         results.forEach(result => {
             output += `
                 <div class="result-item">
-                    <h3>${result.PDV || 'N/A'}</h3>
+                    <h3>${result.PLU || 'N/A'}</h3>
                     <ul>
-                        <li><strong>SAP:</strong> ${result.SAP || 'N/A'}
-                        <i class="material-icons copy-icon" onclick="copyToClipboard('${result.SAP}')">content_copy</i>
+                        <li><strong>Descripción:</strong> ${result.DESCRIPCION_PLU || 'N/A'}
+                        <i class="material-icons copy-icon" onclick="copyToClipboard('${result.DESCRIPCION_PLU}')">content_copy</i>
                         </li>
-                        <li><strong>NIT:</strong> ${result.NIT || 'N/A'}</li>
-                        <li><strong>Código Cliente:</strong> ${result.CODIGOCLIENTE || 'N/A'}</li>
-                        <li><strong>Distrito:</strong> ${result.CIUDAD || 'N/A'}</li>
-                        <li><strong>Población:</strong> ${result.POBLACION || 'N/A'}</li>
-                        <li><strong>Barrio:</strong> ${result.BARRIO || 'N/A'}</li>
-                        <li><strong>Dirección:</strong> ${result.DIRECCION || 'N/A'}</li>
-                        <li><strong>Región:</strong> ${result.REGION || 'N/A'}</li>
-                        <li><strong>Canal:</strong> ${result.CANAL || 'N/A'}</li>
-                        <li><strong>Razón Social:</strong> ${result['RAZON SOCIAL'] || 'N/A'}</li>
-
+                        <li><strong>Marca:</strong> ${result.MARCA || 'N/A'}</li>
+                        <li><strong>Sublínea:</strong> ${result.SUBLINEA || 'N/A'}</li>
                     </ul>
                 </div>
             `;
